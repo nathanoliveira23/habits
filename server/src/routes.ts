@@ -63,7 +63,7 @@ export async function appRoutes(app: FastifyInstance) {
       },
     });
 
-    const completedHabits = day?.dayHabits.map((dayHabit: { habit_id: any; }) => dayHabit.habit_id);
+    const completedHabits = day?.dayHabits.map((dayHabit: { habit_id: string; }) => dayHabit.habit_id);
 
     return {
       possibleHabits,
@@ -88,7 +88,7 @@ export async function appRoutes(app: FastifyInstance) {
 
     if (!day) 
       day = await prisma.day.create({
-        date: {
+        data: {
           date: today,
         }
       });
@@ -110,7 +110,7 @@ export async function appRoutes(app: FastifyInstance) {
       })
     } else {
       await prisma.dayHabit.create({
-        date: {
+        data: {
           day_id: day.id,
           habit_id: id,
         }
