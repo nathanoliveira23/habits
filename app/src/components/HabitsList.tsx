@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
 
 interface HabitsListProps {
-  date?: Date;
+  date: Date;
   onCompletedChanged: (completed: number) => void;
 }
 
@@ -29,11 +29,11 @@ export function HabitsList({ date, onCompletedChanged } : HabitsListProps) {
   useEffect(() => {
     api.get("/day", {
       params: {
-        date: date?.toISOString(),
+        date: date.toISOString(),
       }
     })
     .then(response => setHabitsInfo(response.data))
-  });
+  }, []);
 
   async function handleToggleHabit(habitId: string) {
     await api.patch(`/habits/${habitId}/toggle`);

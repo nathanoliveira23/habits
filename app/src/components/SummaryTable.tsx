@@ -11,10 +11,6 @@ const summaryDates = generateDateFromYearBeginning();
 const minimumSummaryDatesSize = 18 * 7; // 18 weeks
 const amountOfDaysToFill = minimumSummaryDatesSize - summaryDates.length;
 
-const summaryData = {
-  
-}
-
 type Summary = Array<{
   id: string;
   date: string;
@@ -26,7 +22,7 @@ export function SummaryTable() {
   const [summary, setSummary] = useState<Summary>([]);
 
   useEffect(() => {
-    api.get("http://localhost:3333/summary")
+    api.get("/summary")
       .then(response => setSummary(response.data));
   }, []);
 
